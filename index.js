@@ -35,7 +35,7 @@ module.exports = function(options) {
                 addEvent(item.elm, i, page);
             } else if (is.dotted(i, left, right, currentPage, innerWindow, pagingList.size())) {
                 var item = pagingList.add({
-                    page: "&laquo;",
+                    page: "...",
                     dotted: true
                 })[0];
                 classes(item.elm).add("disabled");
