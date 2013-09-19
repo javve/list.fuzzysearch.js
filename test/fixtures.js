@@ -63,6 +63,30 @@ var fixture = {
     ture: {
         name: "Ture Tur",
         born: '1965'
+    },
+    anders: {
+        name: "Anders",
+        born: '1987'
+    },
+    anna: {
+        name: "Anna",
+        born: '1987'
+    },
+    matilda: {
+        name: "Matilda",
+        born: '1983'
+    },
+    li: {
+        name: "Li",
+        born: '1992'
+    },
+    asa: {
+        name: "Åsa",
+        born: '1943'
+    },
+    gun: {
+        name: "Gun",
+        born: '1965'
     }
 };
 fixture.all = [
@@ -77,5 +101,11 @@ fixture.all = [
     fixture.egon,
     fixture.lars,
     fixture.bertil,
-    fixture.ture
+    fixture.ture,
+    fixture.anders,
+    fixture.anna,
+    fixture.matilda,
+    fixture.li,
+    fixture.asa,
+    fixture.gun
 ];
