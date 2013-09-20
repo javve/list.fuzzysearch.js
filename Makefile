@@ -1,12 +1,16 @@
 
 build: components index.js
-	@component build --dev -n list.pagination
+	@component build --dev -n list.fuzzysearch
+
+dev: index.js components
+	@component install -d
+	@component build -n list -d
 
 standalone:
-	@component build --standalone ListPagination -n list.pagination.standalone
+	@component build --standalone ListFuzzysearch -n list.fuzzysearch.standalone
 	mkdir -p dist
-	mv build/list.pagination.standalone.js dist/list.pagination.js
-	uglifyjs -o dist/list.pagination.min.js dist/list.pagination.js
+	mv build/list.fuzzysearch.standalone.js dist/list.fuzzysearch.js
+	uglifyjs -o dist/list.fuzzysearch.min.js dist/list.pagination.js
 
 components: component.json
 	@component install --dev

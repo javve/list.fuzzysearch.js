@@ -1,15 +1,19 @@
 {
-  "name": "list.pagination.js",
-  "repo": "javve/list.pagination.js",
-  "description": "A pagination plugin for list.js",
+  "name": "list.fuzzysearch.js",
+  "repo": "javve/list.fuzzysearch.js",
+  "description": "A fuzzy search plugin for list.js",
   "version": "0.1.0",
   "keywords": [],
   "dependencies": {
     "component/classes": "*",
     "component/event": "*"
   },
-  "development": {},
-  "license": "MIT",
+  "development": {
+    "visionmedia/mocha": "*",
+    "chaijs/chai": "*",
+    "component/jquery": "1.9.1"
+  },
+  "license": "Apache License",
   "main": "index.js",
   "scripts": [
     "index.js"

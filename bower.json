@@ -1,18 +1,18 @@
 {
-  "name": "list.pagination.js",
-  "main": "dist/list.pagination.js",
+  "name": "list.fuzzysearch.js",
+  "main": "dist/list.fuzzysearch.js",
   "version": "0.1.0",
   "authors": [
     "Jonny Strömberg <jonny.stromberg@gmail.com>"
   ],
-  "description": "A pagination plugin for List.js",
+  "description": "A fuzzy search plugin for List.js",
   "keywords": [
-    "pagination",
+    "fuzzy",
+    "search",
     "list.js",
-    "list",
-    "bootstrap"
+    "list"
   ],
-  "license": "MIT",
+  "license": "Apache License",
   "homepage": "http://listjs.com",
   "ignore": [
     "**/.*",

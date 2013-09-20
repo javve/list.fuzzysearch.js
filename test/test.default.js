@@ -10,7 +10,7 @@ describe('Default settings, innerWindow: 2, outerWindow: 0, left: 0, right: 0', 
             item: itemHTML,
             page: 2,
             plugins: [
-                ListPagination({})
+                ListFuzzy({})
             ]
         }, fixture.all);
 
