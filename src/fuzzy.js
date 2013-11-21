@@ -118,5 +118,6 @@ module.exports = function(text, pattern, options) {
         }
         last_rd = rd;
     }
+
     return (best_loc < 0) ? false : true;
 };

@@ -28,14 +28,19 @@ module.exports = function(options) {
             }
         },
         item: function(item, columns, searchArguments) {
+            var found = true;
             for(var i = 0; i < searchArguments.length; i++) {
+                var foundArgument = false;
                 for (var j = 0, jl = columns.length; j < jl; j++) {
                     if (fuzzySearch.values(item.values(), columns[j], searchArguments[i])) {
-                        item.found = true;
-                        break;
+                        foundArgument = true;
                     }
                 }
+                if(!foundArgument) {
+                    found = false;
+                }
             }
+            item.found = found;
         },
         values: function(values, value, searchArgument) {
             if (values.hasOwnProperty(value)) {
