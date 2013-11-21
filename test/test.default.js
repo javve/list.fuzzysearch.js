@@ -1,92 +1,74 @@
-describe('Default settings, innerWindow: 2, outerWindow: 0, left: 0, right: 0', function() {
+function fireKeyup(el) {
+    if (document.createEvent) {
+        var evObj;
+        if (window.KeyEvent) {
+            evObj = document.createEvent('KeyEvents');
+            evObj.initKeyEvent('keyup', true, true, window, false, false, false, false, 13, 0);
+        } else {
+            evObj = document.createEvent('UIEvents');
+            evObj.initUIEvent('keyup', true, true, window, 1);
+        }
+        el.dispatchEvent(evObj);
+    } else if( document.createEventObject ) {
+        el.fireEvent('onkeyup');
+    } else {
+        // IE 5.0, seriously? :)
+    }
+}
+
+
+describe('Default settings', function() {
     var list,
         itemHTML,
         pagination;
 
-    before(function() {
-        itemHTML = fixture.list(['name'])
+    beforeEach(function() {
+        itemHTML = fixture.list(['name', 'born'])
         list = new List('list', {
-            valueNames: ['name'],
+            valueNames: ['name', 'born'],
             item: itemHTML,
-            page: 2,
             plugins: [
-                ListFuzzy({})
+                ListFuzzySearch()
             ]
         }, fixture.all);
-
-        pagination = $('.pagination');
     });
 
-    after(function() {
+    afterEach(function() {
         fixture.removeList();
     });
 
-    it('should have default settings', function() {
-        expect(pagination.find('a').size()).to.equal(4);
-        expect(pagination.find('a').get(0).innerHTML).to.equal("1");
-        expect(pagination.find('a').get(1).innerHTML).to.equal("2");
-        expect(pagination.find('a').get(2).innerHTML).to.equal("3");
-        expect(pagination.find('a').get(3).innerHTML).to.equal("...");
-        expect(pagination.find('a').get(4)).to.equal(undefined);
+    it('should have default attribute', function() {
+        expect(list.fuzzySearch).to.be.a('object');
+        expect(list.fuzzySearch.search).to.be.a('function');
     });
 
-    it('should show same pages for show(7,2) and show(8,2)', function() {
-        list.show(7, 2);
-        expect(pagination.find('a').size()).to.equal(7);
-        expect(pagination.find('a').get(0).innerHTML).to.equal("...");
-        expect(pagination.find('a').get(1).innerHTML).to.equal("2");
-        expect(pagination.find('a').get(2).innerHTML).to.equal("3");
-        expect(pagination.find('a').get(3).innerHTML).to.equal("4");
-        expect(pagination.find('a').get(4).innerHTML).to.equal("5");
-        expect(pagination.find('a').get(5).innerHTML).to.equal("6");
-        expect(pagination.find('a').get(6).innerHTML).to.equal("...");
-        expect(pagination.find('a').get(7)).to.equal(undefined);
-        expect($(pagination.find('li').get(2)).hasClass('active')).to.equal(false);
-        expect($(pagination.find('li').get(3)).hasClass('active')).to.equal(true);
-        expect($(pagination.find('li').get(4)).hasClass('active')).to.equal(false);
+    it('should find result', function() {
+        list.fuzzySearch.search('angelica');
+        expect(list.matchingItems.length).to.be(1);
     });
 
-    it('should show same pages for show(7,2) and show(8,2)', function() {
-        list.show(8, 2);
-        expect(pagination.find('a').size()).to.equal(7);
-        expect(pagination.find('a').get(0).innerHTML).to.equal("...");
-        expect(pagination.find('a').get(1).innerHTML).to.equal("2");
-        expect(pagination.find('a').get(2).innerHTML).to.equal("3");
-        expect(pagination.find('a').get(3).innerHTML).to.equal("4");
-        expect(pagination.find('a').get(4).innerHTML).to.equal("5");
-        expect(pagination.find('a').get(5).innerHTML).to.equal("6");
-        expect(pagination.find('a').get(6).innerHTML).to.equal("...");
-        expect(pagination.find('a').get(7)).to.equal(undefined);
-        expect($(pagination.find('li').get(2)).hasClass('active')).to.equal(false);
-        expect($(pagination.find('li').get(3)).hasClass('active')).to.equal(true);
-        expect($(pagination.find('li').get(4)).hasClass('active')).to.equal(false);
+    it('should find result', function() {
+        list.fuzzySearch.search('jon str');
+        expect(list.matchingItems.length).to.be(6);
     });
 
-    it('should test show(14,2)', function() {
-        list.show(14, 2);
-        expect(pagination.find('a').size()).to.equal(6);
-        expect(pagination.find('a').get(0).innerHTML).to.equal("...");
-        expect(pagination.find('a').get(1).innerHTML).to.equal("5");
-        expect(pagination.find('a').get(2).innerHTML).to.equal("6");
-        expect(pagination.find('a').get(3).innerHTML).to.equal("7");
-        expect(pagination.find('a').get(4).innerHTML).to.equal("8");
-        expect(pagination.find('a').get(5).innerHTML).to.equal("9");
-        expect(pagination.find('a').get(6)).to.equal(undefined);
-        expect($(pagination.find('li').get(2)).hasClass('active')).to.equal(false);
-        expect($(pagination.find('li').get(3)).hasClass('active')).to.equal(true);
-        expect($(pagination.find('li').get(4)).hasClass('active')).to.equal(false);
-    });
+    describe('Search field', function() {
 
-    it('should show last page with show(17,2)', function() {
-        list.show(17, 2);
-        expect(pagination.find('a').size()).to.equal(4);
-        expect(pagination.find('a').get(0).innerHTML).to.equal("...");
-        expect(pagination.find('a').get(1).innerHTML).to.equal("7");
-        expect(pagination.find('a').get(2).innerHTML).to.equal("8");
-        expect(pagination.find('a').get(3).innerHTML).to.equal("9");
-        expect(pagination.find('a').get(4)).to.equal(undefined);
-        expect($(pagination.find('li').get(1)).hasClass('active')).to.equal(false);
-        expect($(pagination.find('li').get(2)).hasClass('active')).to.equal(false);
-        expect($(pagination.find('li').get(3)).hasClass('active')).to.equal(true);
+        it('should trigger searchStart', function(done) {
+            list.on('searchStart', function() {
+                done();
+            });
+            $('#list .fuzzy-search').val('angelica');
+            fireKeyup($('#list .fuzzy-search')[0]);
+        });
+
+        it('should trigger searchComplete', function(done) {
+            list.on('searchComplete', function() {
+                done();
+            });
+            $('#list .fuzzy-search').val('angelica');
+            fireKeyup($('#list .fuzzy-search')[0]);
+        });
+
     });
 });

@@ -6,23 +6,28 @@
   "keywords": [],
   "dependencies": {
     "component/classes": "*",
-    "component/event": "*"
+    "segmentio/extend": "*",
+    "javve/events": "*",
+    "javve/get-by-class": "*",
+    "javve/to-string": "*"
   },
   "development": {
     "visionmedia/mocha": "*",
-    "chaijs/chai": "*",
+    "techjacker/expect.js": "*",
     "component/jquery": "1.9.1"
   },
   "license": "Apache License",
   "main": "index.js",
   "scripts": [
-    "index.js"
+    "index.js",
+    "src/fuzzy.js"
   ],
+  "twitter": "@javve",
+
   "local": [
     "list"
   ],
   "paths": [
     "/Users/Jonny/Sites/list"
-  ],
-  "twitter": "@javve"
+  ]
 }

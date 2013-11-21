@@ -1,8 +1,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>List.js Paging Mocha Tests</title>
-    <link rel="stylesheet" href="../build/list.fuzzysearch.css" />
+    <title>List.js Fuzzy Search Mocha Tests</title>
+    <link rel="stylesheet" href="../build/build.css" />
     <style>
         #list,
         #parse-list,
@@ -14,26 +14,29 @@
 <body>
 
     <div id="mocha"></div>
-    <script src="../build/list.fuzzysearch.js"></script>
+    <script src="../build/build.js"></script>
+    <script src="mocha.js"></script> <!-- this specific version is needed for grunt-mocha (wtf...) -->
     <script>
-        var ListFuzzysearch = require('list.fuzzysearch.js'),
+        var ListFuzzySearch = require('list.fuzzysearch.js'),
             List = require('list.js'),
-            chai = require('chai'),
             $ = require('jquery');
 
-        require('mocha');
+        if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+            // This version is needed to not get "Out of stack space" error in IE
+            require('mocha');
+        }
+
         mocha.setup('bdd');
-        expect = chai.expect
+        expect = require('expect.js');
     </script>
+
     <script src="fixtures.js"></script>
-
-    <script>mocha.setup('bdd')</script>
-    <script>expect = chai.expect</script>
-
     <script src="test.default.js"></script>
 
     <script>
-        mocha.run();
+        if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+            mocha.run();
+        }
     </script>
 </body>
 </html>

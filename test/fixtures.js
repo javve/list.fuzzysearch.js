@@ -1,6 +1,6 @@
 var fixture = {
     list: function(valueNames) {
-        var listHtml = $('<div id="list"><ul class="list"></ul><ul class="pagination"></ul></div>'),
+        var listHtml = $('<div id="list"><input class="fuzzy-search" /><ul class="list"></ul></div>'),
             item = "";
 
         item = "<li>";
