@@ -43,13 +43,18 @@ describe('Default settings', function() {
     });
 
     it('should find result', function() {
-        list.fuzzySearch.search('angelica');
+        list.fuzzySearch.search('guybrush');
         expect(list.matchingItems.length).to.be(1);
     });
 
     it('should find result', function() {
-        list.fuzzySearch.search('jon str');
-        expect(list.matchingItems.length).to.be(6);
+        list.fuzzySearch.search('g thre');
+        expect(list.matchingItems.length).to.be(1);
+    });
+
+    it('should find result', function() {
+        list.fuzzySearch.search('thre');
+        expect(list.matchingItems.length).to.be(4);
     });
 
     describe('Search field', function() {
