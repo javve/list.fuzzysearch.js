@@ -58,7 +58,12 @@ module.exports = function(options) {
         init: function(parentList) {
             list = parentList;
 
-            events.bind(getByClass(list.listContainer, options.searchClass), 'keyup', function(e) {
+            var eventSearch = 'input';
+            if ( document && !('oninput' in document.createElement('input')) ){
+                eventSearch = 'keyup';
+            }
+
+            events.bind(getByClass(list.listContainer, options.searchClass), eventSearch, function(e) {
                 var target = e.target || e.srcElement; // IE have srcElement
                 list.search(target.value, fuzzySearch.search);
             });
