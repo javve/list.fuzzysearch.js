@@ -641,13 +641,13 @@ var classes = require('classes'),
 module.exports = function(options) {
     options = options || {};
 
-    extend(options, {
+    extend({
         location: 0,
         distance: 100,
         threshold: 0.4,
         multiSearch: true,
         searchClass: 'fuzzy-search'
-    });
+    }, options);
 
     var fuzzy = require('./src/fuzzy'),
         list;
