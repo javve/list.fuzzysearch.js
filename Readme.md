@@ -1,5 +1,5 @@
 # Deprecated since List.js 1.5.0
-The pagination plugin is bundled in List.js since v1.5.0. Check it out -> [github.com/javve/list.js](https://github.com/javve/list.js)
+The fuzzy search plugin is bundled in List.js since v1.5.0. Check it out -> [github.com/javve/list.js](https://github.com/javve/list.js)
 
 
 
