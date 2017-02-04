@@ -1,8 +1,14 @@
-# list.fuzzysearch.js
+# Deprecated since List.js 1.5.0
+The pagination plugin is bundled in List.js since v1.5.0. Check it out -> [github.com/javve/list.js](https://github.com/javve/list.js)
+
+
+
+
+## list.fuzzysearch.js
 
 A fuzzy search plugin for List.js
 
-## Download & Documentation
+### Download & Documentation
 Go to [Listjs.com/docs/plugins/fuzzysearch](http://listjs.com/docs/plugins/fuzzysearch).
 
 ### Contribute
